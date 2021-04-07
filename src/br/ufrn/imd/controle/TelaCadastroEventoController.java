@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -21,6 +22,9 @@ public class TelaCadastroEventoController {
     private ChoiceBox<String> selectorTipoEvento;
     
     private Stage clienteStage;
+    
+    @FXML
+    private Label labelDefault;
 
     @FXML
     private Button buttonAvançar;
@@ -29,13 +33,18 @@ public class TelaCadastroEventoController {
     void avançarCadastro(ActionEvent event) throws IOException {
     	String tipo = selectorTipoEvento.getValue();
     	if(tipo == null) {
-    		System.out.println("Selecione um item");
+    		labelDefault.setVisible(true);
     	}else if(tipo == "Diário"){
     		eventoDiario();
     		clienteStage.close();
     	}else if(tipo == "Semanal"){
     		eventoSemanal();
     		clienteStage.close();
+    		
+    	}else if(tipo == "Mensal"){
+    		eventoMensal();
+    		clienteStage.close();
+    		
     	}
     	
     }
@@ -95,8 +104,22 @@ public class TelaCadastroEventoController {
 	}
 	
 	private void eventoMensal() throws IOException {
-		//
+		
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaCadastroEventoMensalController.class.getResource("/br/ufrn/imd/visao/TelaCadastroEventoMensal.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	// Criando um novo Stage
+    	Stage clienteStage = new Stage();
+    	clienteStage.setTitle("Cadastro de Evento");
+    	clienteStage.setResizable(false);
+    	Scene scene = new Scene(page);
+    	clienteStage.setScene(scene);
+    	
+    	// Setando o Controle 
+    	TelaCadastroEventoMensalController controller = loader.getController();
+    	controller.setClienteStage(clienteStage);
+    	clienteStage.showAndWait();
 	}
-
 
 }

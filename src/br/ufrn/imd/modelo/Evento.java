@@ -5,7 +5,7 @@ import java.util.Date;
 public class Evento {
 
 	private String tituloEvento;
-	private Date dataEvento;
+	private Date dataInicioEvento;
 	private String tipoEvento;
 	private String descricaoEvento;
 	
@@ -15,11 +15,11 @@ public class Evento {
 	public void setTituloEvento(String tituloEvento) {
 		this.tituloEvento = tituloEvento;
 	}
-	public Date getDataEvento() {
-		return dataEvento;
+	public Date getDataInicioEvento() {
+		return dataInicioEvento;
 	}
-	public void setDataEvento(Date dataEvento) {
-		this.dataEvento = dataEvento;
+	public void setDataInicioEvento(Date dataInicioEvento) {
+		this.dataInicioEvento = dataInicioEvento;
 	}
 	public String getTipoEvento() {
 		return tipoEvento;

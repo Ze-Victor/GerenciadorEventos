@@ -15,5 +15,10 @@
       </Label>
       <ChoiceBox fx:id="selectorTipoEvento" layoutX="210.0" layoutY="194.0" prefHeight="15.0" prefWidth="174.0" />
       <Button fx:id="buttonAvançar" layoutX="264.0" layoutY="306.0" mnemonicParsing="false" onAction="#avançarCadastro" text="Avançar" />
+      <Label fx:id="labelDefault" layoutX="207.0" layoutY="229.0" text="*Selecione uma das opçoes listadas" visible="false">
+         <font>
+            <Font name="System Italic" size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
