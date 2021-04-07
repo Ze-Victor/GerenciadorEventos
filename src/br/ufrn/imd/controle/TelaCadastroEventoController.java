@@ -1,75 +1,43 @@
 package br.ufrn.imd.controle;
 
-
-import java.util.Date;
-
-import br.ufrn.imd.modelo.Evento;
-
+import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class TelaCadastroEventoController {
 	
 	ObservableList lista = FXCollections.observableArrayList();
-	
-	private Stage clienteStage;
-	
-
-    @FXML
-    private TextField textFieldTítuloEvento;
-
-    @FXML
-    private TextArea textDescricao;
-
-    @FXML
-    private DatePicker datePickerEvento;
 
     @FXML
     private ChoiceBox<String> selectorTipoEvento;
+    
+    private Stage clienteStage;
 
     @FXML
-    private Button buttonCadatrarEvento;
+    private Button buttonAvançar;
 
     @FXML
-    private Button buttonCancelar;
-
-    @FXML
-    void buttonCancelarCadastro(ActionEvent event) {
-    	//
-    	clienteStage.close();
-    }
-
-    @FXML
-    void cadastrarEventoNoDB(ActionEvent event) {
-    	
-    	Evento e = new Evento();
-    	
-    	e.setTituloEvento(textFieldTítuloEvento.getText());
-    	
-    	//Pegar tipo do evento com choiceBox
+    void avançarCadastro(ActionEvent event) throws IOException {
     	String tipo = selectorTipoEvento.getValue();
     	if(tipo == null) {
     		System.out.println("Selecione um item");
-    	}else {
-    		e.setTipoEvento(tipo);
+    	}else if(tipo == "Diário"){
+    		eventoDiario();
+    		clienteStage.close();
+    	}else if(tipo == "Semanal"){
+    		eventoSemanal();
+    		clienteStage.close();
     	}
     	
-    	//pegar data do datePicker
-    	Date data = new Date(datePickerEvento.getValue().toEpochDay());
-    	e.setDataEvento(data);
-    	
-    	e.setDescricaoEvento(textDescricao.getText());
-    	
-    	System.out.println("Evento Cadastrado");
     }
 
 	public void setClienteStage(Stage clienteStage) {
@@ -77,7 +45,6 @@ public class TelaCadastroEventoController {
 		this.clienteStage = clienteStage;
 		loaderData();
 	}
-	
 	private void loaderData() {
 		lista.removeAll(lista);
 		
@@ -88,5 +55,48 @@ public class TelaCadastroEventoController {
 		lista.addAll(a,b,c);
 		selectorTipoEvento.getItems().addAll(lista);
 	}
+	
+	private void eventoDiario() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaCadastroEventoDiarioController.class.getResource("/br/ufrn/imd/visao/TelaCadastroEventoDiario.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	// Criando um novo Stage
+    	Stage clienteStage = new Stage();
+    	clienteStage.setTitle("Cadastro de Evento");
+    	clienteStage.setResizable(false);
+    	Scene scene = new Scene(page);
+    	clienteStage.setScene(scene);
+    	
+    	// Setando o Controle 
+    	TelaCadastroEventoDiarioController controller = loader.getController();
+    	controller.setClienteStage(clienteStage);
+    	clienteStage.showAndWait();
+	}
+	
+	private void eventoSemanal() throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaCadastroEventoSemanalController.class.getResource("/br/ufrn/imd/visao/TelaCadastroEventoSemanal.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	// Criando um novo Stage
+    	Stage clienteStage = new Stage();
+    	clienteStage.setTitle("Cadastro de Evento");
+    	clienteStage.setResizable(false);
+    	Scene scene = new Scene(page);
+    	clienteStage.setScene(scene);
+    	
+    	// Setando o Controle 
+    	TelaCadastroEventoSemanalController controller = loader.getController();
+    	controller.setClienteStage(clienteStage);
+    	clienteStage.showAndWait();
+    	
+	}
+	
+	private void eventoMensal() throws IOException {
+		//
+	}
+
 
 }
