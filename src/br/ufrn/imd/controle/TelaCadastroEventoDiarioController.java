@@ -1,8 +1,7 @@
 package br.ufrn.imd.controle;
-<<<<<<< HEAD
-=======
+
 import java.io.IOException;
->>>>>>> ee179e232821f7f07e0b4b547ba06cf3ddf12f30
+
 import java.util.Date;
 
 import br.ufrn.imd.MainApp;
@@ -39,15 +38,10 @@ public class TelaCadastroEventoDiarioController {
 	@FXML
 	private Button buttonCadastrarEvento;
 
-	@FXML
-<<<<<<< HEAD
-	void cadastrarEventoDB(ActionEvent event) {
-		
+	@FXML	
+	public void cadastrarEventoDB(ActionEvent event) throws IOException {
 		btnConfirmarClicked = true;
-=======
-	void cadastrarEventoDB(ActionEvent event) throws IOException {
-btnConfirmarClicked = true;
->>>>>>> ee179e232821f7f07e0b4b547ba06cf3ddf12f30
+
     	
     	if (btnConfirmarClicked){
     	
@@ -63,17 +57,10 @@ btnConfirmarClicked = true;
 	    	e.setDataInicioEvento(data);
 	    	
 	    	db.inserirEvento(e);
-<<<<<<< HEAD
     	
     	}
     	
     	clienteStage.close();
-=======
-	    	
-    	
-    	}
-    	voltarTelaPrincipal();
->>>>>>> ee179e232821f7f07e0b4b547ba06cf3ddf12f30
 	}
 
 	public void setClienteStage(Stage clienteStage) {
