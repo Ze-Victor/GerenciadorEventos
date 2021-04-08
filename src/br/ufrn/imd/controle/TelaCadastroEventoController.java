@@ -2,6 +2,7 @@ package br.ufrn.imd.controle;
 
 import java.io.IOException;
 
+import br.ufrn.imd.MainApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +29,9 @@ public class TelaCadastroEventoController {
 
     @FXML
     private Button buttonAvançar;
+    
+    @FXML
+    private Button buttonVoltar;
 
     @FXML
     void avançarCadastro(ActionEvent event) throws IOException {
@@ -48,6 +52,25 @@ public class TelaCadastroEventoController {
     	}
     	
     }
+    
+    @FXML
+    void voltarTelaPrincipal(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaPrincipalController.class.getResource("/br/ufrn/imd/visao/TelaPrincipal.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	// Criando um novo Stage
+    	Stage clienteStage = MainApp.mStage;
+    	clienteStage.setTitle("AgendaVirtal");
+    	clienteStage.setResizable(false);
+    	Scene scene = new Scene(page);
+    	clienteStage.setScene(scene);
+    	
+    	// Setando o Controle 
+    	TelaPrincipalController controller = loader.getController();
+    	//controller.setClienteStage(clienteStage);
+    	//clienteStage.showAndWait();
+    }
 
 	public void setClienteStage(Stage clienteStage) {
 		// TODO Auto-generated method stub
@@ -65,7 +88,7 @@ public class TelaCadastroEventoController {
 		selectorTipoEvento.getItems().addAll(lista);
 	}
 	
-	private void eventoDiario() throws IOException {
+	private void eventoDiario() throws IOException , IllegalStateException{
 		FXMLLoader loader = new FXMLLoader();
     	loader.setLocation(TelaCadastroEventoDiarioController.class.getResource("/br/ufrn/imd/visao/TelaCadastroEventoDiario.fxml"));
     	AnchorPane page = (AnchorPane) loader.load();

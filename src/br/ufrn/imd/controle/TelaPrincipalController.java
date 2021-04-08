@@ -2,6 +2,7 @@ package br.ufrn.imd.controle;
 
 import java.io.IOException;
 
+import br.ufrn.imd.MainApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,8 @@ import javafx.stage.Stage;
 
 public class TelaPrincipalController {
 
+    @FXML
+    private AnchorPane rootPane;
     @FXML
     private MenuItem menuItemCadastro;
 
@@ -74,13 +77,13 @@ public class TelaPrincipalController {
     	carregarTelaSobreApp();
     }
     
-    private void carregarTelaPrincipal() throws IOException {
+    private void carregarTelaPrincipal() throws IOException, IllegalStateException {
     	FXMLLoader loader = new FXMLLoader();
     	loader.setLocation(TelaCadastroEventoController.class.getResource("/br/ufrn/imd/visao/TelaCadastroEvento.fxml"));
     	AnchorPane page = (AnchorPane) loader.load();
     	
     	// Criando um novo Stage
-    	Stage clienteStage = new Stage();
+    	Stage clienteStage = MainApp.mStage;
     	clienteStage.setTitle("Cadastro de Clientes");
     	clienteStage.setResizable(false);
     	Scene scene = new Scene(page);
@@ -89,7 +92,7 @@ public class TelaPrincipalController {
     	// Setando o Controle 
     	TelaCadastroEventoController controller = loader.getController();
     	controller.setClienteStage(clienteStage);
-    	clienteStage.showAndWait();
+    	//clienteStage.showAndWait();
     }
     
     private void carregarTelaSobreApp() throws IOException {
