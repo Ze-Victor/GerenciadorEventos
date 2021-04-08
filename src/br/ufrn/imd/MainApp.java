@@ -1,5 +1,8 @@
 package br.ufrn.imd;
 
+import java.util.ArrayList;
+
+import br.ufrn.imd.modelo.Evento;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +13,8 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
 	
 	public static Stage mStage;
+	public static ArrayList<Evento> eventos;
+	public static ArrayList<Evento> eventosDoDia;
 
 	public void change_scene(Scene s)
     {
