@@ -2,6 +2,7 @@ package br.ufrn.imd.controle;
 
 import java.io.IOException;
 
+import br.ufrn.imd.MainApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -21,23 +23,53 @@ public class TelaCadastroEventoController {
     private ChoiceBox<String> selectorTipoEvento;
     
     private Stage clienteStage;
+    
+    @FXML
+    private Label labelDefault;
 
     @FXML
     private Button buttonAvançar;
+    
+    @FXML
+    private Button buttonVoltar;
 
     @FXML
     void avançarCadastro(ActionEvent event) throws IOException {
     	String tipo = selectorTipoEvento.getValue();
     	if(tipo == null) {
-    		System.out.println("Selecione um item");
+    		labelDefault.setVisible(true);
     	}else if(tipo == "Diário"){
     		eventoDiario();
     		clienteStage.close();
     	}else if(tipo == "Semanal"){
     		eventoSemanal();
     		clienteStage.close();
+    		
+    	}else if(tipo == "Mensal"){
+    		eventoMensal();
+    		clienteStage.close();
+    		
     	}
     	
+    }
+    
+    @FXML
+    void voltarTelaPrincipal(ActionEvent event) throws IOException {
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaPrincipalController.class.getResource("/br/ufrn/imd/visao/TelaPrincipal.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	// Criando um novo Stage
+    	Stage clienteStage = MainApp.mStage;
+    	clienteStage.setTitle("AgendaVirtal");
+    	clienteStage.setResizable(false);
+    	Scene scene = new Scene(page);
+    	clienteStage.setScene(scene);
+    	
+    	// Setando o Controle 
+    	TelaPrincipalController controller = loader.getController();
+    	//controller.setClienteStage(clienteStage);
+    	//clienteStage.showAndWait();
     }
 
 	public void setClienteStage(Stage clienteStage) {
@@ -56,7 +88,7 @@ public class TelaCadastroEventoController {
 		selectorTipoEvento.getItems().addAll(lista);
 	}
 	
-	private void eventoDiario() throws IOException {
+	private void eventoDiario() throws IOException , IllegalStateException{
 		FXMLLoader loader = new FXMLLoader();
     	loader.setLocation(TelaCadastroEventoDiarioController.class.getResource("/br/ufrn/imd/visao/TelaCadastroEventoDiario.fxml"));
     	AnchorPane page = (AnchorPane) loader.load();
@@ -95,8 +127,22 @@ public class TelaCadastroEventoController {
 	}
 	
 	private void eventoMensal() throws IOException {
-		//
+		
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaCadastroEventoMensalController.class.getResource("/br/ufrn/imd/visao/TelaCadastroEventoMensal.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	// Criando um novo Stage
+    	Stage clienteStage = new Stage();
+    	clienteStage.setTitle("Cadastro de Evento");
+    	clienteStage.setResizable(false);
+    	Scene scene = new Scene(page);
+    	clienteStage.setScene(scene);
+    	
+    	// Setando o Controle 
+    	TelaCadastroEventoMensalController controller = loader.getController();
+    	controller.setClienteStage(clienteStage);
+    	clienteStage.showAndWait();
 	}
-
 
 }
