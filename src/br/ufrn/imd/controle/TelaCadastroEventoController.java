@@ -40,14 +40,14 @@ public class TelaCadastroEventoController {
     		labelDefault.setVisible(true);
     	}else if(tipo == "Diário"){
     		eventoDiario();
-    		clienteStage.close();
+    		//clienteStage.close();
     	}else if(tipo == "Semanal"){
     		eventoSemanal();
-    		clienteStage.close();
+    		//clienteStage.close();
     		
     	}else if(tipo == "Mensal"){
     		eventoMensal();
-    		clienteStage.close();
+    		//clienteStage.close();
     		
     	}
     	
