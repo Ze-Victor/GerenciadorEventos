@@ -1,6 +1,7 @@
 package br.ufrn.imd.controle;
 import java.util.Date;
 
+import br.ufrn.imd.MainApp;
 import br.ufrn.imd.modelo.DataBase;
 import br.ufrn.imd.modelo.EventoMensal;
 import javafx.event.ActionEvent;
@@ -33,7 +34,8 @@ public class TelaCadastroEventoDiarioController {
 
 	@FXML
 	void cadastrarEventoDB(ActionEvent event) {
-btnConfirmarClicked = true;
+		
+		btnConfirmarClicked = true;
     	
     	if (btnConfirmarClicked){
     	
@@ -52,7 +54,7 @@ btnConfirmarClicked = true;
     	
     	}
     	
-    	//clienteStage.close();
+    	clienteStage.close();
 	}
 
 	public void setClienteStage(Stage clienteStage) {

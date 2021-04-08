@@ -59,7 +59,7 @@ btnConfirmarClicked = true;
     	
     	}
     	
-    	//clienteStage.close();
+    	clienteStage.close();
     }
 
 	public void setClienteStage(Stage clienteStage) {

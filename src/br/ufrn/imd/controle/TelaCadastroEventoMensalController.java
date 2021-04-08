@@ -58,11 +58,11 @@ public class TelaCadastroEventoMensalController {
 	    	e.setDataFinalEvento(dataFinal);
 	    	
 	    	db.inserirEvento(e);
-	    	db.list();
+	    	//db.list();
 
     	}
     	
-    	//clienteStage.close();
+    	clienteStage.close();
     	
     }
     
