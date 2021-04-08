@@ -1,5 +1,7 @@
 package br.ufrn.imd.controle;
 
+import br.ufrn.imd.modelo.DataBase;
+
 import java.util.Date;
 
 import br.ufrn.imd.modelo.EventoMensal;
@@ -14,6 +16,10 @@ import javafx.stage.Stage;
 public class TelaCadastroEventoMensalController {
 
 	private Stage clienteStage;
+	
+	private boolean btnConfirmarClicked = false;
+	
+	DataBase db;
 	
     @FXML
     private TextArea textDescricaoEvento;
@@ -33,21 +39,34 @@ public class TelaCadastroEventoMensalController {
     @FXML
     void cadastrarEvento(ActionEvent event) {
     	
-    	EventoMensal e = new EventoMensal();
-    	e.setTituloEvento(textTituloEvento.getText());
-    	e.setDescricaoEvento(textDescricaoEvento.getText());
-    	e.setTipoEvento();
+    	btnConfirmarClicked = true;
     	
-    	Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
-    	e.setDataInicioEvento(dataInicio);
+    	if (btnConfirmarClicked){
     	
-    	Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
-    	e.setDataFinalEvento(dataFinal);
+    		db = DataBase.getInstance();
+    		
+	    	EventoMensal e = new EventoMensal();
+	    	e.setTituloEvento(textTituloEvento.getText());
+	    	e.setDescricaoEvento(textDescricaoEvento.getText());
+	    	e.setTipoEvento();
+	    	
+	    	
+	    	Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
+	    	e.setDataInicioEvento(dataInicio);
+	    	
+	    	Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
+	    	e.setDataFinalEvento(dataFinal);
+	    	
+	    	db.inserirEvento(e);
+	    	db.list();
+
+    	}
     	
-    	System.out.println("Evento " + e.getTipoEvento() + " Cadastrado para " + dataInicio + " até " + dataFinal);
-    	
+    	//clienteStage.close();
     	
     }
+    
+    
 
 	public void setClienteStage(Stage clienteStage) {
 		// TODO Auto-generated method stub
