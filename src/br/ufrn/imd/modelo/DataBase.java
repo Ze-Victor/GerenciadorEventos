@@ -28,7 +28,7 @@ public class DataBase {
 
 	
 	private DataBase(){
-		eventos  = getData();
+		eventos = getData();
 	}
 	
 	// Singleton
