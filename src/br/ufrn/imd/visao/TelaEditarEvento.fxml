@@ -15,12 +15,13 @@
    <children>
       <SplitPane dividerPositions="0.44481605351170567" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="256.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="154.0">
                <children>
-                  <TableView layoutX="8.0" layoutY="39.0" prefHeight="398.0" prefWidth="262.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableViewnEventos" layoutX="8.0" layoutY="39.0" prefHeight="398.0" prefWidth="385.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-123.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="144.0" text="Titulo" />
-                      <TableColumn minWidth="5.0" prefWidth="89.0" text="Data" />
+                      <TableColumn fx:id="tableColunmTItulo" prefWidth="144.0" text="Titulo" />
+                      <TableColumn fx:id="tableColunmTipo" minWidth="5.0" prefWidth="168.0" text="Tipo" />
+                        <TableColumn fx:id="tableColunmDescricao" minWidth="0.0" prefWidth="0.0" text="Descriçao" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -28,7 +29,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="327.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="281.0">
                <children>
                   <Button fx:id="btnRetornar" layoutX="127.0" layoutY="346.0" mnemonicParsing="false" onAction="#retornarTelaPrincipal" text="Retornar" />
                   <GridPane layoutX="33.0" layoutY="94.0" prefHeight="170.0" prefWidth="262.0">
