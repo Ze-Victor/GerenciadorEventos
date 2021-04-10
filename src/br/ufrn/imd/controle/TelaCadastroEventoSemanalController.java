@@ -50,10 +50,10 @@ public class TelaCadastroEventoSemanalController {
     		db = DataBase.getInstance();
     		
 	    	EventoSemanal e = new EventoSemanal();
-	    	e.setTituloEvento(textTituloEvento.getText());
-	    	e.setDescricaoEvento(textDescricaoEvento.getText());
-	    	e.setTipoEvento();
 	    	
+	    	e.setTituloEvento(textTituloEvento.getText());
+	    	e.setTipoEvento();
+	      	e.setDescricaoEvento(textDescricaoEvento.getText());
 	    	
 	    	Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
 	    	e.setDataInicioEvento(dataInicio);
@@ -62,6 +62,7 @@ public class TelaCadastroEventoSemanalController {
 	    	e.setDataFinalEvento(dataFinal);
 	    	
 	    	db.inserirEvento(e);
+	    	System.out.println("Evento Semanal Inserido!");
     	
     	}
     	

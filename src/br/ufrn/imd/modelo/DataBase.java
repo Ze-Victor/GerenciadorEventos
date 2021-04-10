@@ -1,10 +1,11 @@
 package br.ufrn.imd.modelo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataBase {
 	
-	private ArrayList<Evento> eventos;
+	private List<Evento> eventos;
 	
 	private static DataBase eventos_db;
 
@@ -23,13 +24,11 @@ public class DataBase {
 
 	public void inserirEvento(Evento e)  {
 		eventos.add(e);
-		System.out.println("Evento Inserido com Sucesso!!");
+		//System.out.println("Evento Inserido com Sucesso!!");
 	}
 	
-	public void list() {
-		for(Evento evento : eventos) {
-			System.out.println("Evento " + evento.getTituloEvento());
-		}
+	public List<Evento> listar() {
+		return eventos;
 	}
 		
 	
