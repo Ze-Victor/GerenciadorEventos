@@ -77,8 +77,8 @@ public class DataBase {
 		
 	}	
 	
-	public List<Evento> getData(){
-		List<Evento> ev = new ArrayList<Evento>();
+	public ArrayList<Evento> getData(){
+		ArrayList<Evento> ev = new ArrayList<Evento>();
 		try {
 			Type listType = new TypeToken<ArrayList<Evento>>(){}.getType();
 			GsonBuilder gson = new GsonBuilder();
@@ -90,7 +90,7 @@ public class DataBase {
 				return ev;
 			}
 			JsonReader reader = new JsonReader(new FileReader(dir));
-			ev = Arrays.asList(gson.create().fromJson(reader, Evento[].class));
+			ev = gson.create().fromJson(reader, listType);
 		}
 		catch(IOException e) {
 			e.printStackTrace();
