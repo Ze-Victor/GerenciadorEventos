@@ -65,7 +65,7 @@ public class MainApp extends Application {
 		Parent root = FXMLLoader.load(getClass().getResource("visao/TelaPrincipal.fxml"));
 		Scene scene = new Scene(root);
 		mStage.setScene(scene);
-		mStage.setTitle("AgendaVirtal");
+		mStage.setTitle("AgendaVirtual");
 		mStage.setResizable(false);
 		mStage.show();
 	}

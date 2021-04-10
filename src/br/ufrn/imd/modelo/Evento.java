@@ -28,6 +28,10 @@ public abstract class Evento implements Serializable {
         this.tituloEvento.set(titulo);
     }
     
+    public String getTituloEvento() {
+    	return this.tituloEvento.get();
+    }
+    
     public String getTipoEvento() {
         return tipoEvento.get();
     }
@@ -40,6 +44,10 @@ public abstract class Evento implements Serializable {
 
     public SimpleStringProperty descricaoEventoProperty() {
         return descricaoEvento;
+    }
+    
+    public String getDescricaoEvento() {
+    	return this.descricaoEvento.get();
     }
 
     public void setDescricaoEvento(String tipo) {

@@ -19,12 +19,16 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+import br.ufrn.imd.MainApp;
+
 
 public class DataBase {
 	
 	private List<Evento> eventos;
 	
 	private static DataBase eventos_db;
+	
+	private int tamanho;
 
 	
 	private DataBase(){
@@ -50,16 +54,40 @@ public class DataBase {
 
 	public void inserirEvento(Evento e)  {
 		eventos.add(e);
-		//System.out.println("Evento Inserido com Sucesso!!");
+		//System.out.println();
+		tamanho++;
 	}
 	
 	public List<Evento> listar() {
 		return eventos;
 	}
 	
+	public void atualizar() {
+		Evento e;
+		for (int i=0; i<MainApp.eventos.size(); ++i) {
+			if(MainApp.eventos.get(i).getTipoEvento().equals("Semanal")) {
+				e = new EventoSemanal(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
+				((EventoSemanal)e).setDataInicioEvento(((EventoSemanal)MainApp.eventos.get(i)).getDataInicioEvento());
+				((EventoSemanal)e).setDataFinalEvento(((EventoSemanal)MainApp.eventos.get(i)).getDataFinalEvento());
+				eventos.set(i, e);
+			}
+			else if (MainApp.eventos.get(i).getTipoEvento().equals("Mensal")) {
+				e = new EventoMensal(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
+				((EventoMensal)e).setDataInicioEvento(((EventoMensal)MainApp.eventos.get(i)).getDataInicioEvento());
+				((EventoMensal)e).setDataFinalEvento(((EventoMensal)MainApp.eventos.get(i)).getDataFinalEvento());
+				eventos.set(i, e);			
+			}
+			else if (MainApp.eventos.get(i).getTipoEvento().equals("Diario")) {
+				e = new EventoDiario(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
+				((EventoDiario)e).setDataInicioEvento(((EventoDiario)MainApp.eventos.get(i)).getDataInicioEvento());
+				eventos.set(i, e);
+			}
+		}
+	}
+	
 	public void save(){
+		atualizar();
 		try {
-			Type listType = new TypeToken<ArrayList<Evento>>(){}.getType();
 			GsonBuilder gson = new GsonBuilder();
 			gson.registerTypeAdapter(Evento.class, new EventoAdpter());
 			String dir = System.getProperty("user.dir");
@@ -74,8 +102,20 @@ public class DataBase {
 		catch(IOException e) {
 			e.printStackTrace();
 		}
-		
-	}	
+	}
+
+	public void removeEvento(Evento evento) {
+		// TODO Auto-generated method stub
+		eventos.remove(evento);
+	}
+
+	public int tamanho() {
+		if (eventos_db == null) {
+			eventos_db = new DataBase();
+			tamanho = 0;
+		}
+		return tamanho;
+	}
 	
 	public ArrayList<Evento> getData(){
 		ArrayList<Evento> ev = new ArrayList<Evento>();
