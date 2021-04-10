@@ -65,7 +65,7 @@ public class TelaCadastroEventoMensalController {
 	    	e.setDataFinalEvento(dataFinal);
 	    	
 	    	db.inserirEvento(e);
-	    	//db.list();
+	    	db.save();
 
     	}
     	

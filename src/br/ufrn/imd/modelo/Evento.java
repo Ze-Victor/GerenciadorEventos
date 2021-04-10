@@ -9,6 +9,13 @@ public class Evento {
 	private String tipoEvento;
 	private String descricaoEvento;
 	
+	
+	
+	public Evento() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public String getTituloEvento() {
 		return tituloEvento;
 	}
@@ -32,6 +39,11 @@ public class Evento {
 	}
 	public void setDescricaoEvento(String descricaoEvento) {
 		this.descricaoEvento = descricaoEvento;
+	}
+	@Override
+	public String toString() {
+		return "Evento [tituloEvento=" + tituloEvento + ", dataInicioEvento=" + dataInicioEvento + ", tipoEvento="
+				+ tipoEvento + ", descricaoEvento=" + descricaoEvento + "]";
 	}
 	
 	

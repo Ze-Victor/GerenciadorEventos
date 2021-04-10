@@ -57,6 +57,7 @@ public class TelaCadastroEventoDiarioController {
 	    	e.setDataInicioEvento(data);
 	    	
 	    	db.inserirEvento(e);
+	    	db.save();
     	
     	}
     	

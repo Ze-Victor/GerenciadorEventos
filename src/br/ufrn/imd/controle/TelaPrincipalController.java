@@ -1,5 +1,6 @@
 package br.ufrn.imd.controle;
 
+import java.io.File;
 import java.io.IOException;
 
 import br.ufrn.imd.MainApp;
