@@ -61,12 +61,6 @@ public class TelaEditarEventoController implements Initializable{
     private TextArea textDescricao;
 
     @FXML
-    private DatePicker datePickerInicio;
-
-    @FXML
-    private DatePicker datePickerFinal;
-
-    @FXML
     private Button buttonSalvar;
 
     @FXML
@@ -74,33 +68,35 @@ public class TelaEditarEventoController implements Initializable{
 
     @FXML
     void removerEvento(ActionEvent event) {
-    	//
+    	Evento evento = tableViewnEventos.getSelectionModel().getSelectedItem();
+    	
+    	if(evento != null) {
+    		db.removeEvento(evento);
+    	} else {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setContentText("SELECIONE UM ITEM NA TABELA");
+    		alert.show();
+    	}
     }
 
     @FXML
     void salvarAleteracoes(ActionEvent event) {
-    	//
-    	salvarNovosDados();
+    	// TODO Auto-generated method stub
+    	Evento evento = tableViewnEventos.getSelectionModel().getSelectedItem();
+    			
+    	if(evento != null) {
+    		evento.setTituloEvento(textFieldTitulo.getText());
+    		evento.setTipoEvento(choiceBoxTipo.getValue());
+    		evento.setDescricaoEvento(textDescricao.getText());
+    				
+    		//carregarTableViewEvento();
+    				
+    	} else {
+    		Alert alert = new Alert(Alert.AlertType.ERROR);
+    		alert.setContentText("SELECIONE UM ITEM NA TABELA");
+    		alert.show();
+    	}
     }
-
-    private void salvarNovosDados() {
-		// TODO Auto-generated method stub
-		Evento evento = tableViewnEventos.getSelectionModel().getSelectedItem();
-		
-		if(evento != null) {
-			evento.setTituloEvento(textFieldTitulo.getText());
-			evento.setTipoEvento(choiceBoxTipo.getValue());
-			evento.setDescricaoEvento(textDescricao.getText());
-			
-			carregarTableViewEvento();
-			
-		} else {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setContentText("SELECIONE UM ITEM NA TABELA");
-			alert.show();
-		}
-	
-	}
 
 	@FXML
     void retornarTelaPrincipal(ActionEvent event) {

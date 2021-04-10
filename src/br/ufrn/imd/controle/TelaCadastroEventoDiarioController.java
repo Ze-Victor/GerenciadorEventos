@@ -58,6 +58,7 @@ public class TelaCadastroEventoDiarioController {
 	    	
 	    	db.inserirEvento(e);
 	    	System.out.println("Evento Diário Inserido! ");
+	    	//System.out.print(db.tamanho());
     	
     	}
     	
