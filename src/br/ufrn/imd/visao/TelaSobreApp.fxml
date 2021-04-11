@@ -2,12 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrn.imd.controle.TelaSobreAppController">
    <children>
-      <Button fx:id="buttonRetornar" layoutX="263.0" layoutY="315.0" mnemonicParsing="false" onAction="#retornarTelaPrincipal" text="Retornar" />
-      <Label layoutX="137.0" layoutY="161.0" text="INSERIR TEXTO SOBRE A APLICAÇAO E TRABALHO" />
+      <Button fx:id="buttonRetornar" layoutX="263.0" layoutY="317.0" mnemonicParsing="false" onAction="#retornarTelaPrincipal" text="Retornar" />
+      <Label layoutX="201.0" layoutY="44.0" text="AGENDA VIRTUAL">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <TextArea layoutX="63.0" layoutY="90.0" prefHeight="200.0" prefWidth="510.0" text="         Aplicação desenvolvida como projeto da última unidade da disciplina&#10;de Linguagens de Programação II do curso Bacharelado em Tecnologia da &#10;Informação.&#10;&#10;Desenvolvedores:&#10;&#9;Guilherme Egle Pegado Lima Silva&#10;&#9;José Victor Ferreira da Fonseca&#10;" />
    </children>
 </AnchorPane>

@@ -4,7 +4,9 @@ import br.ufrn.imd.MainApp;
 import br.ufrn.imd.modelo.DataBase;
 
 import java.io.IOException;
-
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import br.ufrn.imd.modelo.EventoMensal;
@@ -57,16 +59,26 @@ public class TelaCadastroEventoMensalController {
 	    	e.setTituloEvento(textTituloEvento.getText());
 	    	e.setTipoEvento();
 	      	e.setDescricaoEvento(textDescricaoEvento.getText());
+	      	
+	      	LocalDate date = datePickerInicioEvento.getValue();
+	        Instant instant = Instant.from(date.atStartOfDay(ZoneId.systemDefault()));
+	        Date dataEscolhida = Date.from(instant);
 	    	
-	    	Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
-	    	e.setDataInicioEvento(dataInicio);
+	    	//Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
+	    	e.setDataInicioEvento(dataEscolhida);
 	    	
-	    	Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
-	    	e.setDataFinalEvento(dataFinal);
+	    	date = datePickerFinalEvento.getValue();
+	        instant = Instant.from(date.atStartOfDay(ZoneId.systemDefault()));
+	        dataEscolhida = Date.from(instant);
+	    	
+	    	//Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
+	    	e.setDataFinalEvento(dataEscolhida);
 	    	
 	    	MainApp.eventos.add(e);
 	    	db.save();
 	    	System.out.println("Evento Mensal Inserido!");
+	    	
+	    	//System.out.println("Data: " + e.getDataInicioEvento() + "Até" + e.getDataFinalEvento());
 
     	}
     	

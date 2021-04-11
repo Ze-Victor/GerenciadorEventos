@@ -1,7 +1,9 @@
 package br.ufrn.imd.controle;
 
 import java.io.IOException;
-
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import br.ufrn.imd.MainApp;
@@ -52,11 +54,18 @@ public class TelaCadastroEventoDiarioController {
 	    	e.setTituloEvento(textTituloEvento.getText());
 	    	e.setTipoEvento();
 	      	e.setDescricaoEvento(textDescricaoEvento.getText());
+	      	
+	      	LocalDate data = datePickerEvento.getValue();
+	        Instant instant = Instant.from(data.atStartOfDay(ZoneId.systemDefault()));
+	        Date date = Date.from(instant);
+	        
+	    	//Date data = new Date(datePickerEvento.getValue().toEpochDay());
+	    	e.setDataInicioEvento(date);
 	    	
-	    	Date data = new Date(datePickerEvento.getValue().toEpochDay());
-	    	e.setDataInicioEvento(data);
+	    	System.out.println("Data: " + date);
 	    	
 	    	MainApp.eventos.add(e);
+	    	MainApp.carregarEventosDia();
 	    	db.save();
 	    	System.out.println("Evento Diário Inserido! ");
     	}

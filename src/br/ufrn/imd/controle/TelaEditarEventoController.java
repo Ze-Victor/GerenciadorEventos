@@ -74,7 +74,7 @@ public class TelaEditarEventoController implements Initializable{
     	Evento evento = tableViewnEventos.getSelectionModel().getSelectedItem();
     	
     	if(evento != null) {
-    		db.removeEvento(evento);
+    		MainApp.eventos.remove(evento);
     	} else {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
     		alert.setContentText("SELECIONE UM ITEM NA TABELA");

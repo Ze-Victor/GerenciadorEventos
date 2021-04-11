@@ -1,6 +1,9 @@
 package br.ufrn.imd.controle;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import br.ufrn.imd.MainApp;
@@ -55,15 +58,25 @@ public class TelaCadastroEventoSemanalController {
 	    	e.setTipoEvento();
 	      	e.setDescricaoEvento(textDescricaoEvento.getText());
 	    	
-	    	Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
-	    	e.setDataInicioEvento(dataInicio);
+	      	LocalDate date = datePickerInicioEvento.getValue();
+	        Instant instant = Instant.from(date.atStartOfDay(ZoneId.systemDefault()));
+	        Date dataEscolhida = Date.from(instant);
 	    	
-	    	Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
-	    	e.setDataFinalEvento(dataFinal);
+	    	//Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
+	    	e.setDataInicioEvento(dataEscolhida);
+	    	
+	    	date = datePickerFinalEvento.getValue();
+	        instant = Instant.from(date.atStartOfDay(ZoneId.systemDefault()));
+	        dataEscolhida = Date.from(instant);
+	    	
+	    	//Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
+	    	e.setDataFinalEvento(dataEscolhida);
 	    	
 	    	MainApp.eventos.add(e);
 	    	db.save();
 	    	System.out.println("Evento Semanal Inserido!");
+	    	
+	    	//System.out.println("Data: " + e.getDataInicioEvento() + " Até " + e.getDataFinalEvento());
     	
     	}
     	
