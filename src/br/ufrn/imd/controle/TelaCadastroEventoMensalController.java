@@ -4,15 +4,20 @@ import br.ufrn.imd.MainApp;
 import br.ufrn.imd.modelo.DataBase;
 
 import java.io.IOException;
-
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import br.ufrn.imd.modelo.EventoMensal;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -23,6 +28,8 @@ public class TelaCadastroEventoMensalController {
 
 	private Stage clienteStage;
 	
+	ObservableList listaDia = FXCollections.observableArrayList();
+	
 	private boolean btnConfirmarClicked = false;
 	
 	DataBase db;
@@ -32,12 +39,9 @@ public class TelaCadastroEventoMensalController {
 
     @FXML
     private TextField textTituloEvento;
-
+    
     @FXML
-    private DatePicker datePickerInicioEvento;
-
-    @FXML
-    private DatePicker datePickerFinalEvento;
+    private ChoiceBox<Integer> choiceBoxDia;
 
     @FXML
     private Button buttonCadastrarEvento;
@@ -57,27 +61,38 @@ public class TelaCadastroEventoMensalController {
 	    	e.setTituloEvento(textTituloEvento.getText());
 	    	e.setTipoEvento();
 	      	e.setDescricaoEvento(textDescricaoEvento.getText());
-	    	
-	    	Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
-	    	e.setDataInicioEvento(dataInicio);
-	    	
-	    	Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
-	    	e.setDataFinalEvento(dataFinal);
+	      	e.setDiaDoMes(choiceBoxDia.getValue());
+	      	e.setDescricaoCompleta();
+	      
 	    	
 	    	MainApp.eventos.add(e);
+	    	MainApp.carregarEventosDia();
 	    	db.save();
 	    	System.out.println("Evento Mensal Inserido!");
+	    	
+	    	//System.out.println("Data: " + e.getDataInicioEvento() + "Até" + e.getDataFinalEvento());
 
     	}
     	
     	clienteStage.close();
     }
     
+    private void loaderDia() {
+		listaDia.removeAll(listaDia);
+		
+		for(int i = 1; i<31; i++) {
+			listaDia.add(i);
+		}
+		
+		choiceBoxDia.setItems(listaDia);
+	}
+    
     
 
 	public void setClienteStage(Stage clienteStage) {
 		// TODO Auto-generated method stub
 		this.clienteStage = clienteStage;
+		loaderDia();
 	}
 	
 	void voltarTelaPrincipal() throws IOException {

@@ -17,10 +17,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -34,7 +36,11 @@ public class TelaEditarEventoController implements Initializable{
     
     ObservableList listaChoice = FXCollections.observableArrayList();
     
+    ObservableList listaMomento = FXCollections.observableArrayList();
+    
     DataBase db;
+    
+    public TelaPrincipalController pai;
     
     private List<Evento> lista;
     private ObservableList <Evento> observableLista;
@@ -53,6 +59,12 @@ public class TelaEditarEventoController implements Initializable{
 	
     @FXML
     private Button btnRetornar;
+    
+    @FXML
+    private ChoiceBox<String> choiceBoxMomento;
+    
+    @FXML
+    private Label labelMomento;
 
     @FXML
     private TextField textFieldTitulo;
@@ -72,9 +84,13 @@ public class TelaEditarEventoController implements Initializable{
     @FXML
     void removerEvento(ActionEvent event) {
     	Evento evento = tableViewnEventos.getSelectionModel().getSelectedItem();
-    	
+    	db = DataBase.getInstance();
     	if(evento != null) {
-    		db.removeEvento(evento);
+    		MainApp.eventos.remove(evento);
+    		MainApp.eventosDoDia.remove(evento);
+    		this.carregarTableViewEvento();
+    		pai.carregarTableViewEvento();
+    		db.save();
     	} else {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
     		alert.setContentText("SELECIONE UM ITEM NA TABELA");
@@ -92,7 +108,8 @@ public class TelaEditarEventoController implements Initializable{
     		evento.setTituloEvento(textFieldTitulo.getText());
     		//evento.setTipoEvento(choiceBoxTipo.getValue());
     		evento.setDescricaoEvento(textDescricao.getText());
-    				
+    		evento.setDescricaoCompleta();
+    		
     		//carregarTableViewEvento();
     				
     	} else {
@@ -113,14 +130,13 @@ public class TelaEditarEventoController implements Initializable{
 	public void setClienteStage(Stage clienteStage) {
 		// TODO Auto-generated method stub
 		this.clienteStage = clienteStage;
-		carregarChoice();
 	}
 
 	@Override
 	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		carregarTableViewEvento();
-		
+		carregarChoice();
 		tableViewnEventos.getSelectionModel().selectedItemProperty().addListener(
 				(observableValue, oldValue, newValue) -> selectionEventoTableView(newValue));
 	}
@@ -130,7 +146,7 @@ public class TelaEditarEventoController implements Initializable{
 		// TODO Auto-generated method stub
 		textFieldTitulo.setText(newValue.getTituloEvento());
 		textDescricao.setText(newValue.getDescricaoEvento());
-		choiceBoxTipo.setValue(newValue.getTipoEvento());
+		choiceBoxTipo.setValue(newValue.getTipoEvento());		
 	}
 
 	public void carregarTableViewEvento() {
@@ -140,11 +156,47 @@ public class TelaEditarEventoController implements Initializable{
 		tableColunmTipo.setCellValueFactory(new PropertyValueFactory<>("tipoEvento"));
 		
 		lista = MainApp.eventos;
-		
+
 		observableLista = FXCollections.observableArrayList(lista);
 		
 		tableViewnEventos.setItems(observableLista);
     }
+	
+	private void carregarPeriodo() {
+		listaMomento.removeAll(listaMomento);
+
+		String a = "Manhã";
+		String b = "Tarde";
+		String c = "Noite";
+		
+		listaMomento.addAll(a,b,c);
+		choiceBoxMomento.setItems(listaMomento);
+	}
+	
+	private void carregarDiaSemana() {
+		listaMomento.removeAll(listaMomento);
+
+		String a = "DOMINGO";
+		String b = "SEGUNDA-FEIRA";
+		String c = "TERÇA-FEIRA";
+		String d = "QUARTA-FEIRA";
+		String e = "QUINTA-FEIRA";
+		String f = "SEXTA-FEIRA";
+		String g = "SABADO";
+		
+		listaMomento.addAll(a,b,c, d, e, f, g);
+		choiceBoxMomento.setItems(listaMomento);
+	}
+	
+	private void carregarDiaMes() {
+		listaMomento.removeAll(listaMomento);
+		
+		for(int i = 1; i<31; i++) {
+			listaMomento.add(i);
+		}
+		
+		choiceBoxMomento.setItems(listaMomento);
+	}
 	
 	private void carregarChoice() {
 		listaChoice.removeAll(listaChoice);

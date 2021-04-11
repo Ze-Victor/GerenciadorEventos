@@ -2,36 +2,38 @@ package br.ufrn.imd.modelo;
 
 import java.util.Date;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class EventoSemanal extends Evento{
-	private Date dataFinalEvento;
-	private Date dataInicioEvento;
 	
+	private String diaSemana;
+
+
+	public String getDiaSemana() {
+		return diaSemana;
+	}
+
+	public void setDiaSemana(String diaSemana) {
+		this.diaSemana = diaSemana;
+	}
+
 	public EventoSemanal() {
 		this.setTipoEvento();
+		this.setDescricaoCompleta();
 	}
 	
 	public EventoSemanal(String titulo, String tipo, String descricao) {
 		super(titulo, tipo, descricao);
 		// TODO Auto-generated constructor stub
-	}
-	
-	public Date getDataInicioEvento() {
-		return dataInicioEvento;
-	}
-
-	public void setDataInicioEvento(Date dataFinalEvento) {
-		this.dataInicioEvento = dataFinalEvento;
-	}
-	
-	public Date getDataFinalEvento() {
-		return dataFinalEvento;
-	}
-
-	public void setDataFinalEvento(Date dataFinalEvento) {
-		this.dataFinalEvento = dataFinalEvento;
+		this.setDescricaoCompleta();
 	}
 	
 	public void setTipoEvento() {
 		this.tipoEvento.set("Semanal");
 	}
+	
+	public void setDescricaoCompleta() {
+		this.descricaoCompleta.set(diaSemana+": "+this.getDescricaoEvento());
+	}
+
 }

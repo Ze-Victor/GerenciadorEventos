@@ -2,18 +2,30 @@ package br.ufrn.imd.controle;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import br.ufrn.imd.MainApp;
+import br.ufrn.imd.modelo.Evento;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class TelaPrincipalController {
+public class TelaPrincipalController implements Initializable {
+	
+	private List<Evento> lista;
+    private ObservableList <Evento> observableLista;
 
     @FXML
     private AnchorPane rootPane;
@@ -37,6 +49,18 @@ public class TelaPrincipalController {
 
     @FXML
     private Button buttonContinuar;
+    
+    @FXML
+    private TableView<Evento> tableViewEventosDia;
+
+    @FXML
+    private TableColumn<Evento, String> tableColumnTitulo;
+
+    @FXML
+    private TableColumn<Evento, String> tableColumnTipo;
+
+    @FXML
+    private TableColumn<Evento, String> tableColumnDescricao;
 
     @FXML
     void buttonSairApp(ActionEvent event) {
@@ -76,6 +100,25 @@ public class TelaPrincipalController {
     @FXML
     void sobreAplicacao(ActionEvent event) throws IOException {
     	carregarTelaSobreApp();
+    }
+    
+    @Override
+	public void initialize(java.net.URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		carregarTableViewEvento();
+	}
+    
+    public void carregarTableViewEvento() {
+
+    	tableColumnTitulo.setCellValueFactory(new PropertyValueFactory<>("tituloEvento"));
+    	tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoCompleta"));
+    	tableColumnTipo.setCellValueFactory(new PropertyValueFactory<>("tipoEvento"));
+		
+		lista = MainApp.eventosDoDia;
+		
+		observableLista = FXCollections.observableArrayList(lista);
+		
+		tableViewEventosDia.setItems(observableLista);
     }
     
     private void carregarTelaPrincipal() throws IOException, IllegalStateException {
@@ -128,6 +171,7 @@ public class TelaPrincipalController {
     	
     	// Setando o Controle 
     	TelaEditarEventoController controller = loader.getController();
+    	controller.pai = this;
     	controller.setClienteStage(clienteStage);
     	clienteStage.showAndWait();
     }
@@ -139,7 +183,7 @@ public class TelaPrincipalController {
     	
     	// Criando um novo Stage
     	Stage clienteStage = new Stage();
-    	clienteStage.setTitle("Editar Evento");
+    	clienteStage.setTitle("Lista de Eventos");
     	clienteStage.setResizable(false);
     	Scene scene = new Scene(page);
     	clienteStage.setScene(scene);
