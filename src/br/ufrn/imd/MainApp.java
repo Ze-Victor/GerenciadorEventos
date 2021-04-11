@@ -38,7 +38,6 @@ public class MainApp extends Application {
 	public void start(Stage stage) throws Exception {
 		DataBase db = DataBase.getInstance();
 		MainApp.eventos = db.getEventos();
-		MainApp.eventosDoDia = new ArrayList<Evento>();
 		carregarEventosDia();
 		try {
 			//System.out.println(MainApp.eventos.toString());
@@ -58,6 +57,7 @@ public class MainApp extends Application {
 	
 	public static void carregarEventosDia() {
 		Date today = new Date();
+		MainApp.eventosDoDia = new ArrayList<Evento>();
 		//System.out.println(today);
 		//System.out.println(getWeek(today));
 		

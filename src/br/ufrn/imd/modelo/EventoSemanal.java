@@ -19,14 +19,21 @@ public class EventoSemanal extends Evento{
 
 	public EventoSemanal() {
 		this.setTipoEvento();
+		this.setDescricaoCompleta();
 	}
 	
 	public EventoSemanal(String titulo, String tipo, String descricao) {
 		super(titulo, tipo, descricao);
 		// TODO Auto-generated constructor stub
+		this.setDescricaoCompleta();
 	}
 	
 	public void setTipoEvento() {
 		this.tipoEvento.set("Semanal");
 	}
+	
+	public void setDescricaoCompleta() {
+		this.descricaoCompleta.set(diaSemana+": "+this.getDescricaoEvento());
+	}
+
 }

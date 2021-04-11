@@ -16,15 +16,21 @@ public class EventoDiario extends Evento{
 
 	public EventoDiario() {
 		this.setTipoEvento();
+		this.setDescricaoCompleta();
 		// TODO Auto-generated constructor stub
 	}
 
 	public EventoDiario(String titulo, String tipo, String descricao) {
 		super(titulo, tipo, descricao);
 		// TODO Auto-generated constructor stub
+		this.setDescricaoCompleta();
 	}
 	
 	public void setTipoEvento() {
 		this.tipoEvento.set("Diario");
+	}
+
+	public void setDescricaoCompleta() {
+		this.descricaoCompleta.set(periodo+": "+this.getDescricaoEvento());
 	}
 }

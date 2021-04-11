@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -38,6 +39,8 @@ public class TelaEditarEventoController implements Initializable{
     ObservableList listaMomento = FXCollections.observableArrayList();
     
     DataBase db;
+    
+    public TelaPrincipalController pai;
     
     private List<Evento> lista;
     private ObservableList <Evento> observableLista;
@@ -81,9 +84,13 @@ public class TelaEditarEventoController implements Initializable{
     @FXML
     void removerEvento(ActionEvent event) {
     	Evento evento = tableViewnEventos.getSelectionModel().getSelectedItem();
-    	
+    	db = DataBase.getInstance();
     	if(evento != null) {
     		MainApp.eventos.remove(evento);
+    		MainApp.eventosDoDia.remove(evento);
+    		this.carregarTableViewEvento();
+    		pai.carregarTableViewEvento();
+    		db.save();
     	} else {
     		Alert alert = new Alert(Alert.AlertType.ERROR);
     		alert.setContentText("SELECIONE UM ITEM NA TABELA");
@@ -101,6 +108,7 @@ public class TelaEditarEventoController implements Initializable{
     		evento.setTituloEvento(textFieldTitulo.getText());
     		//evento.setTipoEvento(choiceBoxTipo.getValue());
     		evento.setDescricaoEvento(textDescricao.getText());
+    		evento.setDescricaoCompleta();
     		
     		//carregarTableViewEvento();
     				
@@ -138,18 +146,7 @@ public class TelaEditarEventoController implements Initializable{
 		// TODO Auto-generated method stub
 		textFieldTitulo.setText(newValue.getTituloEvento());
 		textDescricao.setText(newValue.getDescricaoEvento());
-		choiceBoxTipo.setValue(newValue.getTipoEvento());
-		if(newValue.getTipoEvento().equals("Diario")) {
-			labelMomento.setText("Periodo:" );
-			carregarPeriodo();
-		} else if (newValue.getTipoEvento().equals("Semanal")){
-			labelMomento.setText("Dia da Semana:");
-			carregarDiaSemana();
-		}else if(newValue.getTipoEvento().equals("Mensal")) {
-			labelMomento.setText("Dia do Mes:");
-			carregarDiaMes();
-		}
-		
+		choiceBoxTipo.setValue(newValue.getTipoEvento());		
 	}
 
 	public void carregarTableViewEvento() {
@@ -159,7 +156,7 @@ public class TelaEditarEventoController implements Initializable{
 		tableColunmTipo.setCellValueFactory(new PropertyValueFactory<>("tipoEvento"));
 		
 		lista = MainApp.eventos;
-		
+
 		observableLista = FXCollections.observableArrayList(lista);
 		
 		tableViewnEventos.setItems(observableLista);

@@ -50,6 +50,7 @@ public class TelaCadastroEventoTemporarioController {
 	    	e.setTituloEvento(textTitulo.getText());
 	    	e.setTipoEvento();
 	      	e.setDescricaoEvento(textDescricao.getText());
+	      	e.setDescricaoCompleta();
 	      	
 	      	LocalDate data = datePickerEvento.getValue();
 	        Instant instant = Instant.from(data.atStartOfDay(ZoneId.systemDefault()));

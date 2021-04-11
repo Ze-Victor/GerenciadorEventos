@@ -60,6 +60,7 @@ public class TelaCadastroEventoDiarioController {
 	    	e.setTipoEvento();
 	      	e.setDescricaoEvento(textDescricaoEvento.getText());
 	      	e.setPeriodo(choiceBoxPeriodo.getValue());
+	      	e.setDescricaoCompleta();
 	    	
 	    	MainApp.eventos.add(e);
 	    	MainApp.carregarEventosDia();

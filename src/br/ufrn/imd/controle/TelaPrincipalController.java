@@ -111,7 +111,7 @@ public class TelaPrincipalController implements Initializable {
     public void carregarTableViewEvento() {
 
     	tableColumnTitulo.setCellValueFactory(new PropertyValueFactory<>("tituloEvento"));
-    	tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoEvento"));
+    	tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoCompleta"));
     	tableColumnTipo.setCellValueFactory(new PropertyValueFactory<>("tipoEvento"));
 		
 		lista = MainApp.eventosDoDia;
@@ -171,6 +171,7 @@ public class TelaPrincipalController implements Initializable {
     	
     	// Setando o Controle 
     	TelaEditarEventoController controller = loader.getController();
+    	controller.pai = this;
     	controller.setClienteStage(clienteStage);
     	clienteStage.showAndWait();
     }

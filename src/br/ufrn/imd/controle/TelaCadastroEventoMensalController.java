@@ -62,9 +62,11 @@ public class TelaCadastroEventoMensalController {
 	    	e.setTipoEvento();
 	      	e.setDescricaoEvento(textDescricaoEvento.getText());
 	      	e.setDiaDoMes(choiceBoxDia.getValue());
+	      	e.setDescricaoCompleta();
 	      
 	    	
 	    	MainApp.eventos.add(e);
+	    	MainApp.carregarEventosDia();
 	    	db.save();
 	    	System.out.println("Evento Mensal Inserido!");
 	    	

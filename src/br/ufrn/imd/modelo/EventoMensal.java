@@ -17,14 +17,20 @@ public class EventoMensal extends Evento{
 
 	public EventoMensal() {
 		this.setTipoEvento();
+		this.setDescricaoCompleta();
 	}
 	
 	public EventoMensal(String titulo, String tipo, String descricao) {
 		super(titulo, tipo, descricao);
+		this.setDescricaoCompleta();
 	}
 	
 	public void setTipoEvento() {
 		this.tipoEvento.set("Mensal");
+	}
+
+	public void setDescricaoCompleta() {
+		this.descricaoCompleta.set("Dia "+diaDoMes+": "+this.getDescricaoEvento());
 	}
 		
 }

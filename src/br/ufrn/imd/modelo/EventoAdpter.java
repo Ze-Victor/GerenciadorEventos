@@ -16,12 +16,15 @@ public class EventoAdpter implements JsonSerializer<Evento>, JsonDeserializer<Ev
 
 	@Override
 	public Evento deserialize(JsonElement arg0, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
+		Evento e;
         JsonObject jsonObject = arg0.getAsJsonObject();
         String type = "Evento" + jsonObject.get("tipoEvento").getAsJsonObject().get("value").getAsString();
         JsonElement element = jsonObject;
         try {
             String thePackage = "br.ufrn.imd.modelo.";
-            return arg2.deserialize(element, Class.forName(thePackage + type));
+            e = arg2.deserialize(element, Class.forName(thePackage + type));
+            e.setDescricaoCompleta();
+            return e;
         } catch (ClassNotFoundException cnfe) {
             throw new JsonParseException("Unknown element type: " + type, cnfe);
         }
