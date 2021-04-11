@@ -68,19 +68,17 @@ public class DataBase {
 		for (int i=0; i<MainApp.eventos.size(); ++i) {
 			if(MainApp.eventos.get(i).getTipoEvento().equals("Semanal")) {
 				e = new EventoSemanal(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
-				((EventoSemanal)e).setDataInicioEvento(((EventoSemanal)MainApp.eventos.get(i)).getDataInicioEvento());
-				((EventoSemanal)e).setDataFinalEvento(((EventoSemanal)MainApp.eventos.get(i)).getDataFinalEvento());
+				((EventoSemanal)e).setDiaSemana(((EventoSemanal)MainApp.eventos.get(i)).getDiaSemana());
 				eventos.add(e);
 			}
 			else if (MainApp.eventos.get(i).getTipoEvento().equals("Mensal")) {
 				e = new EventoMensal(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
-				((EventoMensal)e).setDataInicioEvento(((EventoMensal)MainApp.eventos.get(i)).getDataInicioEvento());
-				((EventoMensal)e).setDataFinalEvento(((EventoMensal)MainApp.eventos.get(i)).getDataFinalEvento());
-				eventos.add(e);			
+				((EventoMensal)e).setDiaDoMes(((EventoMensal)MainApp.eventos.get(i)).getDiaDoMes());
+					eventos.add(e);			
 			}
 			else if (MainApp.eventos.get(i).getTipoEvento().equals("Diario")) {
 				e = new EventoDiario(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
-				((EventoDiario)e).setDataInicioEvento(((EventoDiario)MainApp.eventos.get(i)).getDataInicioEvento());
+				((EventoDiario)e).setPeriodo(((EventoDiario)MainApp.eventos.get(i)).getPeriodo());
 				eventos.add(e);
 			}
 		}

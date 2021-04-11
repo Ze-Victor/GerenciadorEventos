@@ -9,11 +9,14 @@ import java.util.Date;
 import br.ufrn.imd.MainApp;
 import br.ufrn.imd.modelo.DataBase;
 import br.ufrn.imd.modelo.EventoSemanal;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -24,6 +27,8 @@ public class TelaCadastroEventoSemanalController {
 
 	private Stage clienteStage;
 	
+	ObservableList listaDiaSemana = FXCollections.observableArrayList();
+	
 	private boolean btnConfirmarClicked = false;
 	
 	DataBase db;
@@ -33,12 +38,9 @@ public class TelaCadastroEventoSemanalController {
 
     @FXML
     private TextField textTituloEvento;
-
+    
     @FXML
-    private DatePicker datePickerInicioEvento;
-
-    @FXML
-    private DatePicker datePickerFinalEvento;
+    private ChoiceBox<String> choiceBoxDiaSemana;
 
     @FXML
     private Button buttonCadastrarEvento;
@@ -57,20 +59,7 @@ public class TelaCadastroEventoSemanalController {
 	    	e.setTituloEvento(textTituloEvento.getText());
 	    	e.setTipoEvento();
 	      	e.setDescricaoEvento(textDescricaoEvento.getText());
-	    	
-	      	LocalDate date = datePickerInicioEvento.getValue();
-	        Instant instant = Instant.from(date.atStartOfDay(ZoneId.systemDefault()));
-	        Date dataEscolhida = Date.from(instant);
-	    	
-	    	//Date dataInicio = new Date(datePickerInicioEvento.getValue().toEpochDay());
-	    	e.setDataInicioEvento(dataEscolhida);
-	    	
-	    	date = datePickerFinalEvento.getValue();
-	        instant = Instant.from(date.atStartOfDay(ZoneId.systemDefault()));
-	        dataEscolhida = Date.from(instant);
-	    	
-	    	//Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
-	    	e.setDataFinalEvento(dataEscolhida);
+	      	e.setDiaSemana(choiceBoxDiaSemana.getValue());
 	    	
 	    	MainApp.eventos.add(e);
 	    	db.save();
@@ -84,9 +73,25 @@ public class TelaCadastroEventoSemanalController {
 
     }
     
+    private void loaderDiaSemana() {
+		listaDiaSemana.removeAll(listaDiaSemana);
+		
+		String a = "DOMINGO";
+		String b = "SEGUNDA-FEIRA";
+		String c = "TERÇA-FEIRA";
+		String d = "QUARTA-FEIRA";
+		String e = "QUINTA-FEIRA";
+		String f = "SEXTA-FEIRA";
+		String g = "SABADO";
+		
+		listaDiaSemana.addAll(a,b,c, d, e, f, g);
+		choiceBoxDiaSemana.setItems(listaDiaSemana);
+	}
+    
 	public void setClienteStage(Stage clienteStage) {
 		// TODO Auto-generated method stub
 		this.clienteStage = clienteStage;
+		loaderDiaSemana();
 	}
 	
 	void voltarTelaPrincipal() throws IOException {

@@ -32,17 +32,15 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Button fx:id="buttonRetornar" layoutX="171.0" layoutY="330.0" mnemonicParsing="false" onAction="#retornarTelaPrincipal" text="Retornar" />
-                  <GridPane layoutX="58.0" layoutY="106.0" prefHeight="187.0" prefWidth="358.0">
+                  <GridPane layoutX="58.0" layoutY="106.0" prefHeight="128.0" prefWidth="337.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="150.0" minWidth="10.0" prefWidth="137.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="175.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="27.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="80.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="139.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <Label text="Titulo do Evento:">
@@ -60,21 +58,9 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </Label>
-                        <Label text="Inicio do Evento:" GridPane.rowIndex="3">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="finalEventoTexto" text="Final do Evento:" GridPane.rowIndex="4">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
                         <Label fx:id="textLabelTitulo" GridPane.columnIndex="1" />
                         <Label fx:id="textLabelTipo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="textLabelDescricao" prefHeight="63.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="textLabelInicio" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="textLabelFinal" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                   <Label layoutX="95.0" layoutY="41.0" text="Detalhes do Evento:">

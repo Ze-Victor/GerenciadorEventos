@@ -48,14 +48,6 @@ public class TelaListarEventosController implements Initializable {
 	 @FXML
 	 private Label textLabelDescricao;
 
-	 @FXML
-	 private Label textLabelInicio;
-
-	 @FXML
-	 private Label textLabelFinal;
-	 
-	 @FXML
-	 private Label finalEventoTexto;
 
 	    
 	@Override
@@ -63,22 +55,12 @@ public class TelaListarEventosController implements Initializable {
 		// TODO Auto-generated method stub
 			carregarTableViewEvento();
 			
-			textLabelFinal.setVisible(false);
-			finalEventoTexto.setVisible(false);
-			
 			tableViewEventos.getSelectionModel().selectedItemProperty().addListener(
 					(observableValue, oldValue, newValue) -> selectionEventoTableView(newValue));
 	}
 	
 	private void selectionEventoTableView(Evento newValue) {
-		if(newValue.getTipoEvento() == "Diario") {
-			textLabelFinal.setVisible(false);
-			finalEventoTexto.setVisible(false);
-		}else {
-			textLabelFinal.setVisible(true);
-			finalEventoTexto.setVisible(true);
-			//textLabelFinal.setText(newValue.getTipoEvento());
-		}
+
 		textLabelTitulo.setText(newValue.getTituloEvento());
 		textLabelTipo.setText(newValue.getTipoEvento());
 		textLabelDescricao.setText(newValue.getDescricaoEvento());

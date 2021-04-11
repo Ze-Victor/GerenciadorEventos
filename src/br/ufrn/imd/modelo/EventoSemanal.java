@@ -3,9 +3,20 @@ package br.ufrn.imd.modelo;
 import java.util.Date;
 
 public class EventoSemanal extends Evento{
+	
 	private Date dataFinalEvento;
 	private Date dataInicioEvento;
 	
+	private String diaSemana;
+	
+	public String getDiaSemana() {
+		return diaSemana;
+	}
+
+	public void setDiaSemana(String diaSemana) {
+		this.diaSemana = diaSemana;
+	}
+
 	public EventoSemanal() {
 		this.setTipoEvento();
 	}

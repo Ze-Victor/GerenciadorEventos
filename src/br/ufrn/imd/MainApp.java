@@ -2,10 +2,12 @@ package br.ufrn.imd;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import br.ufrn.imd.modelo.DataBase;
@@ -39,8 +41,8 @@ public class MainApp extends Application {
 		MainApp.eventosDoDia = new ArrayList<Evento>();
 		carregarEventosDia();
 		try {
-			System.out.println(MainApp.eventos.toString());
-			System.out.println(MainApp.eventosDoDia.toString());
+			//System.out.println(MainApp.eventos.toString());
+			//System.out.println(MainApp.eventosDoDia.toString());
 		}
 		catch (Exception e) {
 			//e.printStackTrace();
@@ -56,20 +58,20 @@ public class MainApp extends Application {
 	
 	public static void carregarEventosDia() {
 		Date today = new Date();
-		System.out.println(today);
+		//System.out.println(today);
+		//System.out.println(getWeek(today));
+		
 		for(Evento e : MainApp.eventos){
 			if(e.getTipoEvento().equals("Semanal")){
-				if(today.after(((EventoSemanal)e).getDataInicioEvento()) && today.before(((EventoSemanal)e).getDataFinalEvento())) {
+				if(((EventoSemanal)e).getDiaSemana().equals(getWeek(today))) {
 					MainApp.eventosDoDia.add(e);
 				}
 			}
 			else if(e.getTipoEvento().equals("Diario")){
-				if(compareDate(today, (((EventoDiario)e).getDataInicioEvento()))) {
-					MainApp.eventosDoDia.add(e);
-				}
+				MainApp.eventosDoDia.add(e);
 			}
 			else if(e.getTipoEvento().equals("Mensal")){
-				if(today.after(((EventoMensal)e).getDataInicioEvento()) && today.before(((EventoMensal)e).getDataFinalEvento())) {
+				if(compareDia(today, ((EventoMensal)e).getDiaDoMes())) {
 					MainApp.eventosDoDia.add(e);
 				}
 			}
@@ -77,7 +79,17 @@ public class MainApp extends Application {
 		}
 
 	}
-	
+	public static boolean compareDia(Date dataHoje, int dia) {
+		
+		Calendar data = Calendar.getInstance();
+		data.setTime(dataHoje);
+		
+		if(data.get(Calendar.DAY_OF_MONTH) == dia) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 	public static boolean compareDate(Date data1, Date data2) {
 		
 		Calendar d1 = Calendar.getInstance();
@@ -94,6 +106,35 @@ public class MainApp extends Application {
 			return false;
 		}
 		
+	}
+	
+	public static String getWeek(Date date){
+	    String dayWeek = "---";
+	    GregorianCalendar gc = new GregorianCalendar();
+	        //gc.setTime(new SimpleDateFormat("dd/MM/yyyy").parse(date));
+	        switch (gc.get(Calendar.DAY_OF_WEEK)) {
+	            case Calendar.SUNDAY:
+	                dayWeek = "DOMINGO";
+	                break;
+	            case Calendar.MONDAY:
+	                dayWeek = "SEGUNDA-FEIRA";
+	                break;
+	            case Calendar.TUESDAY:
+	                dayWeek = "TERCA-FEIRA";
+	            break;
+	            case Calendar.WEDNESDAY:
+	                dayWeek = "QUARTA-FEIRA";
+	                break;
+	            case Calendar.THURSDAY:
+	                dayWeek = "QUINTA-FEIRA";
+	                break;
+	            case Calendar.FRIDAY:
+	                dayWeek = "SEXTA-FEIRA";
+	                break;
+	            case Calendar.SATURDAY:
+	                dayWeek = "SABADO";
+	          }
+	    return dayWeek;
 	}
 	
 	public static void main(String[] args) {
