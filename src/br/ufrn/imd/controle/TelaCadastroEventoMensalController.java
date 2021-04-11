@@ -64,7 +64,7 @@ public class TelaCadastroEventoMensalController {
 	    	Date dataFinal = new Date(datePickerFinalEvento.getValue().toEpochDay());
 	    	e.setDataFinalEvento(dataFinal);
 	    	
-	    	db.inserirEvento(e);
+	    	MainApp.eventos.add(e);
 	    	db.save();
 	    	System.out.println("Evento Mensal Inserido!");
 

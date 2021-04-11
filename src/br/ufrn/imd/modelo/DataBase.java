@@ -64,23 +64,24 @@ public class DataBase {
 	
 	public void atualizar() {
 		Evento e;
+		eventos = new ArrayList<Evento>();
 		for (int i=0; i<MainApp.eventos.size(); ++i) {
 			if(MainApp.eventos.get(i).getTipoEvento().equals("Semanal")) {
 				e = new EventoSemanal(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
 				((EventoSemanal)e).setDataInicioEvento(((EventoSemanal)MainApp.eventos.get(i)).getDataInicioEvento());
 				((EventoSemanal)e).setDataFinalEvento(((EventoSemanal)MainApp.eventos.get(i)).getDataFinalEvento());
-				eventos.set(i, e);
+				eventos.add(e);
 			}
 			else if (MainApp.eventos.get(i).getTipoEvento().equals("Mensal")) {
 				e = new EventoMensal(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
 				((EventoMensal)e).setDataInicioEvento(((EventoMensal)MainApp.eventos.get(i)).getDataInicioEvento());
 				((EventoMensal)e).setDataFinalEvento(((EventoMensal)MainApp.eventos.get(i)).getDataFinalEvento());
-				eventos.set(i, e);			
+				eventos.add(e);			
 			}
 			else if (MainApp.eventos.get(i).getTipoEvento().equals("Diario")) {
 				e = new EventoDiario(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
 				((EventoDiario)e).setDataInicioEvento(((EventoDiario)MainApp.eventos.get(i)).getDataInicioEvento());
-				eventos.set(i, e);
+				eventos.add(e);
 			}
 		}
 	}

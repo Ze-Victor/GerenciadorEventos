@@ -56,7 +56,7 @@ public class TelaCadastroEventoDiarioController {
 	    	Date data = new Date(datePickerEvento.getValue().toEpochDay());
 	    	e.setDataInicioEvento(data);
 	    	
-	    	db.inserirEvento(e);
+	    	MainApp.eventos.add(e);
 	    	db.save();
 	    	System.out.println("Evento Diário Inserido! ");
     	}
