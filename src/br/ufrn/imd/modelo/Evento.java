@@ -1,39 +1,62 @@
 package br.ufrn.imd.modelo;
 
-import java.util.Date;
+import java.io.Serializable;
 
-public class Evento {
+import javafx.beans.property.SimpleStringProperty;
 
-	private String tituloEvento;
-	private Date dataInicioEvento;
-	private String tipoEvento;
-	private String descricaoEvento;
-	
-	public String getTituloEvento() {
-		return tituloEvento;
-	}
-	public void setTituloEvento(String tituloEvento) {
-		this.tituloEvento = tituloEvento;
-	}
-	public Date getDataInicioEvento() {
-		return dataInicioEvento;
-	}
-	public void setDataInicioEvento(Date dataInicioEvento) {
-		this.dataInicioEvento = dataInicioEvento;
-	}
-	public String getTipoEvento() {
-		return tipoEvento;
-	}
-	public void setTipoEvento(String tipoEvento) {
-		this.tipoEvento = tipoEvento;
-	}
-	public String getDescricaoEvento() {
-		return descricaoEvento;
-	}
-	public void setDescricaoEvento(String descricaoEvento) {
-		this.descricaoEvento = descricaoEvento;
+public abstract class Evento implements Serializable {
+	protected SimpleStringProperty tituloEvento = new SimpleStringProperty();
+	protected SimpleStringProperty tipoEvento = new SimpleStringProperty();
+	protected SimpleStringProperty descricaoEvento = new SimpleStringProperty();
+		
+	public Evento() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
+	public Evento(String titulo, String tipo, String descricao) {
+		this.tituloEvento = new SimpleStringProperty(titulo);
+		this.tipoEvento = new SimpleStringProperty(tipo);
+		this.descricaoEvento = new SimpleStringProperty(descricao);
+	}
+		
+	public SimpleStringProperty tituloEventoProperty() {
+        return tituloEvento;
+    }
+
+    public void setTituloEvento(String titulo) {
+        this.tituloEvento.set(titulo);
+    }
+    
+    public String getTituloEvento() {
+    	return this.tituloEvento.get();
+    }
+    
+    public String getTipoEvento() {
+        return tipoEvento.get();
+    }
+    
+    public abstract void setTipoEvento();
+    
+	public SimpleStringProperty tipoEventoProperty() {
+        return tipoEvento;
+    }
+
+    public SimpleStringProperty descricaoEventoProperty() {
+        return descricaoEvento;
+    }
+    
+    public String getDescricaoEvento() {
+    	return this.descricaoEvento.get();
+    }
+
+    public void setDescricaoEvento(String tipo) {
+        this.descricaoEvento.set(tipo);
+    }
+
+	@Override
+	public String toString() {
+		return "Evento [tituloEvento=" + tituloEvento + ", tipoEvento=" + tipoEvento + ", descricaoEvento="
+				+ descricaoEvento + "]";
+	}
 }

@@ -6,7 +6,7 @@ import java.util.Date;
 
 import br.ufrn.imd.MainApp;
 import br.ufrn.imd.modelo.DataBase;
-import br.ufrn.imd.modelo.EventoMensal;
+import br.ufrn.imd.modelo.EventoDiario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,17 +47,18 @@ public class TelaCadastroEventoDiarioController {
     	
     		db = DataBase.getInstance();
     		
-	    	EventoMensal e = new EventoMensal();
-	    	e.setTituloEvento(textTituloEvento.getText());
-	    	e.setDescricaoEvento(textDescricaoEvento.getText());
-	    	e.setTipoEvento();
+	    	EventoDiario e = new EventoDiario();
 	    	
+	    	e.setTituloEvento(textTituloEvento.getText());
+	    	e.setTipoEvento();
+	      	e.setDescricaoEvento(textDescricaoEvento.getText());
 	    	
 	    	Date data = new Date(datePickerEvento.getValue().toEpochDay());
 	    	e.setDataInicioEvento(data);
 	    	
-	    	db.inserirEvento(e);
-    	
+	    	MainApp.eventos.add(e);
+	    	db.save();
+	    	System.out.println("Evento Diário Inserido! ");
     	}
     	
     	clienteStage.close();
