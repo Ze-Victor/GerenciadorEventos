@@ -81,6 +81,11 @@ public class DataBase {
 				((EventoDiario)e).setPeriodo(((EventoDiario)MainApp.eventos.get(i)).getPeriodo());
 				eventos.add(e);
 			}
+			else if (MainApp.eventos.get(i).getTipoEvento().equals("Temporario")) {
+				e = new EventoTemporario(MainApp.eventos.get(i).getTituloEvento(), MainApp.eventos.get(i).getTipoEvento(), MainApp.eventos.get(i).getDescricaoEvento());
+				((EventoTemporario)e).setDataEvento(((EventoTemporario)MainApp.eventos.get(i)).getDataEvento());
+				eventos.add(e);
+			}
 		}
 	}
 	

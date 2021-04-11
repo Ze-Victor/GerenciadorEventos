@@ -62,7 +62,6 @@ public class TelaPrincipalController implements Initializable {
     @FXML
     private TableColumn<Evento, String> tableColumnDescricao;
 
-
     @FXML
     void buttonSairApp(ActionEvent event) {
     	//

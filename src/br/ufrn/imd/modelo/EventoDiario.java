@@ -1,9 +1,11 @@
 package br.ufrn.imd.modelo;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class EventoDiario extends Evento{
 	
 	private String periodo;
-	
+
 	public String getPeriodo() {
 		return periodo;
 	}

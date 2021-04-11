@@ -15,6 +15,7 @@ import br.ufrn.imd.modelo.Evento;
 import br.ufrn.imd.modelo.EventoDiario;
 import br.ufrn.imd.modelo.EventoMensal;
 import br.ufrn.imd.modelo.EventoSemanal;
+import br.ufrn.imd.modelo.EventoTemporario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +28,6 @@ public class MainApp extends Application {
 	public static Stage mStage;
 	public static List<Evento> eventos;
 	public static List<Evento> eventosDoDia;
-	public static List<Evento> listaVazia;
 
 	public void change_scene(Scene s)
     {
@@ -72,6 +72,11 @@ public class MainApp extends Application {
 			}
 			else if(e.getTipoEvento().equals("Mensal")){
 				if(compareDia(today, ((EventoMensal)e).getDiaDoMes())) {
+					MainApp.eventosDoDia.add(e);
+				}
+			}
+			else if(e.getTipoEvento().equals("Temporario")) {
+				if(compareDate(today, ((EventoTemporario)e).getDataEvento())) {
 					MainApp.eventosDoDia.add(e);
 				}
 			}

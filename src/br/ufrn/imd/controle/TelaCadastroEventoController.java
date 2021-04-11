@@ -52,6 +52,8 @@ public class TelaCadastroEventoController {
     		eventoMensal();
     		//clienteStage.close();
     		
+    	}else if(tipo == "Temporario") {
+    		eventoTemporario();
     	}
     	
     }
@@ -86,8 +88,9 @@ public class TelaCadastroEventoController {
 		String a = "Diário";
 		String b = "Semanal";
 		String c = "Mensal";
+		String d = "Temporario";
 		
-		lista.addAll(a,b,c);
+		lista.addAll(a,b,c,d);
 		selectorTipoEvento.getItems().addAll(lista);
 	}
 	
@@ -144,6 +147,25 @@ public class TelaCadastroEventoController {
     	
     	// Setando o Controle 
     	TelaCadastroEventoMensalController controller = loader.getController();
+    	controller.setClienteStage(clienteStage);
+    	clienteStage.showAndWait();
+	}
+	
+	private void eventoTemporario() throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(TelaCadastroEventoTemporarioController.class.getResource("/br/ufrn/imd/visao/TelaCadastroEventoTemporario.fxml"));
+    	AnchorPane page = (AnchorPane) loader.load();
+    	
+    	// Criando um novo Stage
+    	Stage clienteStage = new Stage();
+    	clienteStage.setTitle("Cadastro de Evento");
+    	clienteStage.setResizable(false);
+    	Scene scene = new Scene(page);
+    	clienteStage.setScene(scene);
+    	
+    	// Setando o Controle 
+    	TelaCadastroEventoTemporarioController controller = loader.getController();
     	controller.setClienteStage(clienteStage);
     	clienteStage.showAndWait();
 	}

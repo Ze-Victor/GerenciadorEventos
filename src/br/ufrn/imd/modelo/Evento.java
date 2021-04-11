@@ -8,7 +8,6 @@ public abstract class Evento implements Serializable {
 	protected SimpleStringProperty tituloEvento = new SimpleStringProperty();
 	protected SimpleStringProperty tipoEvento = new SimpleStringProperty();
 	protected SimpleStringProperty descricaoEvento = new SimpleStringProperty();
-	//protected SimpleStringProperty momentoEvento = new SimpleStringProperty();
 		
 	public Evento() {
 		super();
@@ -54,18 +53,6 @@ public abstract class Evento implements Serializable {
     public void setDescricaoEvento(String tipo) {
         this.descricaoEvento.set(tipo);
     }
-    
-//    public SimpleStringProperty momentoEventoProperty() {
-//        return momentoEvento;
-//    }
-//
-//    public void setMomentoEvento(String momento) {
-//        this.momentoEvento.set(momento);
-//    }
-//    
-//    public String getMomentoEvento() {
-//    	return this.momentoEvento.get();
-//    }
 
 	@Override
 	public String toString() {
